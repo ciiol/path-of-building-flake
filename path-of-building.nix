@@ -2,12 +2,12 @@
 
 pkgs.stdenv.mkDerivation rec {
   pname = "path-of-building";
-  version = "2.30.1";
+  version = "2.31.0";
   name = "path-of-building-${version}";
 
   src = fetchTarball {
     url = "https://github.com/PathOfBuildingCommunity/PathOfBuilding/archive/refs/tags/v${version}.tar.gz";
-    sha256 = "17ilil7nw2xnwjp6vi8irqn0hcrwkqczwnr9czjf1w95p005qays";
+    sha256 = "04ihp4mm8l1s0mlgq4riaf6lyy13lr5gsacmj2n3plbwswaax2df";
   };
 
   nativeBuildInputs = [
