@@ -1,0 +1,19 @@
+diff --git a/src/UpdateCheck.lua b/src/UpdateCheck.lua
+index 63647330..f875bfb7 100644
+--- a/src/UpdateCheck.lua
++++ b/src/UpdateCheck.lua
+@@ -4,6 +4,9 @@
+ -- Module: Update Check
+ -- Checks for updates
+ --
++return "none"
++
++--[[
+ local connectionProtocol, proxyURL = ...
+
+ local xml = require("xml")
+@@ -314,3 +317,4 @@ opFile:close()
+
+ ConPrintf("Update is ready.")
+ return updateMode
++--]]
