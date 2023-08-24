@@ -15,7 +15,7 @@
         launcher = packages: pkgs.writeShellScript "launcher" ''
           set -e
           cd ${packages.path-of-building.out}
-          export LUA_PATH='${packages.path-of-building.out}/runtime/lua/?.lua;${packages.path-of-building.out}/runtime/lua/?/init.lua'
+          source ${packages.path-of-building.env}
           exec ${packages.pobfrontend.out}/pobfrontend $@
         '';
       in
