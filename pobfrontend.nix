@@ -7,22 +7,24 @@ pkgs.stdenv.mkDerivation rec {
   src = pkgs.fetchFromGitHub {
     owner = "ernstp";
     repo = "pobfrontend";
-    rev = "9faa19aa362f975737169824c1578d5011487c18";
-    sha256 = "0sgdylky5bg4v5f7610vp61iw6b03jh6pghiv8cwhd4rkqykc76f";
+    rev = "c8bb91fdbd1648f448052b2b8942e4f9c4df8875";
+    sha256 = "1r643arglx0wzszjlgw0mcdx3k6a0lfdsdhfi9xiy9lmp12h99yi";
   };
 
   buildInputs = with pkgs; [
     meson
     ninja
     pkg-config
-    qt6.wrapQtAppsHook
+    qt6.qtbase
+    zlib
+    luaEnv
   ];
 
   nativeBuildInputs = [
-    pkgs.qt6.qtbase
-    pkgs.zlib
-    luaEnv
+    pkgs.qt6.wrapQtAppsHook
   ];
+
+  env.NIX_CFLAGS_COMPILE = pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isDarwin "-F${pkgs.qt6.qtbase}/lib";
 
   installPhase = ''
     install -D -m755 pobfrontend $out/pobfrontend
