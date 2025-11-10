@@ -7,8 +7,8 @@ pkgs.stdenv.mkDerivation rec {
   src = pkgs.fetchFromGitHub {
     owner = "ernstp";
     repo = "pobfrontend";
-    rev = "c8bb91fdbd1648f448052b2b8942e4f9c4df8875";
-    sha256 = "1r643arglx0wzszjlgw0mcdx3k6a0lfdsdhfi9xiy9lmp12h99yi";
+    rev = "7e09fdc29d1e72e9122db71e41ba03fd54bf428b";
+    sha256 = "1dzwb8sq3341myk6djqcyxy5yly9g3dh8jn1fkyy37pkgkrwzbwi";
   };
 
   buildInputs = with pkgs; [
