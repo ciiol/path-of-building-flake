@@ -1,5 +1,5 @@
 diff --git a/src/UpdateCheck.lua b/src/UpdateCheck.lua
-index 63647330..f875bfb7 100644
+index 7d3f8bec..9f439c09 100644
 --- a/src/UpdateCheck.lua
 +++ b/src/UpdateCheck.lua
 @@ -4,6 +4,9 @@
@@ -9,11 +9,11 @@ index 63647330..f875bfb7 100644
 +return "none"
 +
 +--[[
- local connectionProtocol, proxyURL = ...
+ local connectionProtocol, proxyURL, noSSL = ...
 
  local xml = require("xml")
-@@ -314,3 +317,4 @@ opFile:close()
+@@ -338,3 +341,4 @@ opFile:close()
 
  ConPrintf("Update is ready.")
  return updateMode
-+--]]
++]] --
