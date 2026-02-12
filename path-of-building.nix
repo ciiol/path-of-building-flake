@@ -2,7 +2,7 @@
 
 pkgs.stdenv.mkDerivation rec {
   pname = "path-of-building";
-  version = "2.59.2";
+  version = "2.60.0";
   name = "path-of-building-${version}";
   outputs = [
     "out"
@@ -11,7 +11,7 @@ pkgs.stdenv.mkDerivation rec {
 
   src = fetchTarball {
     url = "https://github.com/PathOfBuildingCommunity/PathOfBuilding/archive/refs/tags/v${version}.tar.gz";
-    sha256 = "143qjwhq5qrk23zhhx7yx590fmbywf1aqw76da0l157d9ck0k8vm";
+    sha256 = "0gf6jx8nn4wbl9bnz1l35i6m8qc2z6dafkqy470p1kd3ah8bw3nh";
   };
   patches = [ ./patches/pob-stop-updates.patch ];
 
