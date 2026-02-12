@@ -6,21 +6,34 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        luacurl = (import ./lua-curl-v3.nix) { pkgs = pkgs; luaPackages = pkgs.luajitPackages; };
-        luaEnv = pkgs.luajitPackages.lua.withPackages (ps: with ps; [
-          luacurl
-          luautf8
-        ]);
-        launcher = packages: pkgs.writeShellScript "launcher" ''
-          set -e
-          cd ${packages.path-of-building.out}
-          source ${packages.path-of-building.env}
-          exec ${packages.pobfrontend.out}/pobfrontend $@
-        '';
+        luacurl = (import ./lua-curl-v3.nix) {
+          pkgs = pkgs;
+          luaPackages = pkgs.luajitPackages;
+        };
+        luaEnv = pkgs.luajitPackages.lua.withPackages (
+          ps: with ps; [
+            luacurl
+            luautf8
+          ]
+        );
+        launcher =
+          packages:
+          pkgs.writeShellScript "launcher" ''
+            set -e
+            cd ${packages.path-of-building.out}
+            source ${packages.path-of-building.env}
+            exec ${packages.pobfrontend.out}/pobfrontend $@
+          '';
       in
       rec {
         packages = {
@@ -40,5 +53,6 @@
         };
 
         defaultPackage = packages.path-of-building;
-      });
+      }
+    );
 }

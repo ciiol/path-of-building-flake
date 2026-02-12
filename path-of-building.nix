@@ -4,7 +4,10 @@ pkgs.stdenv.mkDerivation rec {
   pname = "path-of-building";
   version = "2.59.2";
   name = "path-of-building-${version}";
-  outputs = [ "out" "env" ];
+  outputs = [
+    "out"
+    "env"
+  ];
 
   src = fetchTarball {
     url = "https://github.com/PathOfBuildingCommunity/PathOfBuilding/archive/refs/tags/v${version}.tar.gz";
