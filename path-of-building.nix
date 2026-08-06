@@ -2,7 +2,7 @@
 
 pkgs.stdenv.mkDerivation rec {
   pname = "path-of-building";
-  version = "2.65.0";
+  version = "2.67.1";
   name = "path-of-building-${version}";
   outputs = [
     "out"
@@ -11,7 +11,7 @@ pkgs.stdenv.mkDerivation rec {
 
   src = fetchTarball {
     url = "https://github.com/PathOfBuildingCommunity/PathOfBuilding/archive/refs/tags/v${version}.tar.gz";
-    sha256 = "19lzxiw2xb509i3mikjn2303vd592l8wl9jbz7hbwzi2p1xzvnll";
+    sha256 = "15hkw9vl8rd5k7nhcjc5591wspmh14bx484gnli339h7jp4851mi";
   };
   patches = [ ./patches/pob-stop-updates.patch ];
 
@@ -36,7 +36,7 @@ pkgs.stdenv.mkDerivation rec {
     EOL
 
     cat >$env <<EOL
-    export LUA_PATH='$out/runtime/lua/?.lua;$out/runtime/lua/?/init.lua'
+    export LUA_PATH='$out/runtime/lua/?.lua;$out/runtime/lua/?/init.lua;$out/src/?.lua'
     export LUA_CPATH='${luaEnv}/lib/lua/${luaEnv.lua.luaversion}/?.so'
     EOL
   '';
