@@ -23,6 +23,7 @@
         luaEnv = pkgs.luajitPackages.lua.withPackages (
           ps: with ps; [
             luacurl
+            luasocket
             luautf8
           ]
         );
