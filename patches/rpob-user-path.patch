@@ -1,0 +1,23 @@
+diff --git a/src/pob/api/paths.rs b/src/pob/api/paths.rs
+index 1217bcb..5905018 100644
+--- a/src/pob/api/paths.rs
++++ b/src/pob/api/paths.rs
+@@ -1,14 +1,15 @@
++use clap::Parser;
+ use mlua::{IntoLuaMulti, Lua, MultiValue, Result as LuaResult, Value};
+ use std::{fs, path::PathBuf};
+ 
+ use crate::{
++    args::Args,
+     pob::Context,
+     util::{change_working_directory, get_executable_dir},
+ };
+ 
+-pub fn get_user_path(l: &Lua, _: ()) -> LuaResult<PathBuf> {
+-    let ctx = l.app_data_ref::<Context>().unwrap();
+-    Ok(ctx.script_dir.join("userdata"))
++pub fn get_user_path(_: &Lua, _: ()) -> LuaResult<PathBuf> {
++    Ok(Args::parse().game.data_dir().join("userdata"))
+ }
+ 
+ // parent directory of Launch.lua script

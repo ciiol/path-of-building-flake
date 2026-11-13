@@ -16,30 +16,22 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        luacurl = (import ./lua-curl-v3.nix) {
-          pkgs = pkgs;
-          luaPackages = pkgs.luajitPackages;
-        };
-        luaEnv = pkgs.luajitPackages.lua.withPackages (
-          ps: with ps; [
-            luacurl
-            luasocket
-            luautf8
-          ]
-        );
+        rpob = packages: pkgs.lib.getExe packages.rusty-path-of-building;
+        # rusty-path-of-building runs the PoB found in the current directory
+        # and skips its own download of PoB.
         launcher =
           packages:
           pkgs.writeShellScript "launcher" ''
             set -e
             cd ${packages.path-of-building.out}
             source ${packages.path-of-building.env}
-            exec ${packages.pobfrontend.out}/pobfrontend $@
+            exec ${rpob packages} poe1 "$@"
           '';
       in
       rec {
         packages = {
-          pobfrontend = (import ./pobfrontend.nix) { inherit pkgs luaEnv; };
-          path-of-building = (import ./path-of-building.nix) { inherit pkgs luaEnv; };
+          rusty-path-of-building = (import ./rusty-path-of-building.nix) { inherit pkgs; };
+          path-of-building = (import ./path-of-building.nix) { inherit pkgs; };
         };
 
         apps = {
@@ -47,9 +39,9 @@
             type = "app";
             program = "${launcher packages}";
           };
-          pobfrontend = {
+          rusty-path-of-building = {
             type = "app";
-            program = "${packages.pobfrontend.out}/pobfrontend";
+            program = rpob packages;
           };
         };
 

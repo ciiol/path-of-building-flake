@@ -1,4 +1,4 @@
-{ pkgs, luaEnv }:
+{ pkgs }:
 
 pkgs.stdenv.mkDerivation rec {
   pname = "path-of-building";
@@ -14,10 +14,6 @@ pkgs.stdenv.mkDerivation rec {
     sha256 = "0xvrs7ykcpiahld9gmbr8i6pz34il6d6jldfyjsp8hzyvhqr7ksz";
   };
   patches = [ ./patches/pob-stop-updates.patch ];
-
-  nativeBuildInputs = [
-    luaEnv
-  ];
 
   installPhase = ''
     mkdir -p $out/runtime
@@ -37,7 +33,7 @@ pkgs.stdenv.mkDerivation rec {
 
     cat >$env <<EOL
     export LUA_PATH='$out/runtime/lua/?.lua;$out/runtime/lua/?/init.lua;$out/src/?.lua'
-    export LUA_CPATH='${luaEnv}/lib/lua/${luaEnv.lua.luaversion}/?.so'
+    export LUA_CPATH=
     EOL
   '';
 }
